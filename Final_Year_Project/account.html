@@ -54,8 +54,8 @@
   
       // Login function
       function loginUser() {
-          const email = document.getElementById('loginEmail').value;
-          const password = document.getElementById('loginPassword').value;
+          const email = document.getElementById('email').value;
+          const password = document.getElementById('password').value;
   
           // Sign in with email and password
           firebase.auth().signInWithEmailAndPassword(email, password)
@@ -71,6 +71,13 @@
                   console.error('Login failed:', errorCode, errorMessage);
               });
       }
+
+      function stopRedirect(event) {
+            // Your form processing logic goes here
+            
+            // Prevent the default form submission behavior
+            event.preventDefault();
+        }
   </script>
   
       <div class="container">
@@ -116,19 +123,19 @@
                        <span onclick="register2()">Register</span>
                        <hr id="Indicator">
                    </div>
-                   <form id="LoginForm">
+                   <form onsubmit="stopRedirect(event)" id="LoginForm">
                        <input id="email" type="text" placeholder="Email">
                        <input id="password" type="Password" placeholder="Password">
                        <button onclick="loginUser()" type="submit" class="btn">
-                        <a href="index.html">Login</a></button>
+                        Login</a></button>
                        <a href="">Forgot Password</a>
-                   </form>
-                   <div id="RegForm">
+                       </form>
+                   <form onsubmit="stopRedirect(event)" id="RegForm">
                     <input  type="text" placeholder="Username">
                     <input id="email2" type="email" placeholder="Email">
                     <input type="password" id="password2" placeholder="Password">
                     <button onclick = "registerUser()" type="submit" class="btn">Register</button>
-                </div>
+                   </form>
             </div>
         </div>
     </div>
@@ -226,6 +233,7 @@ function login2(){
 RegForm.style.transform = "translateX(300px)";
 LoginForm.style.transform = "translateX(300px)";
 Indicator.style.transform = "translateX(0px)";
+}
 </script>
 
   </body>
